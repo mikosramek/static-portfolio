@@ -8,12 +8,14 @@ edges {
           lastPublicationDate
           firstPublicationDate
       }
-      body {
-        __typename
-        ... on <typename> {
-          primary {
-          }
-          fields {
+      description
+      heading
+      header_image
+      links {
+        name
+        link {
+          ... on _ExternalLink {
+            url
           }
         }
       }

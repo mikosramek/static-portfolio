@@ -9,7 +9,7 @@ const basePages = `
 
 const firstEntries = `
 {
-    <page-name> (sortBy:meta_firstPublicationDate_ASC) {
+    allPages (sortBy:meta_firstPublicationDate_ASC) {
         totalCount
         pageInfo {
             hasNextPage
@@ -21,7 +21,7 @@ const firstEntries = `
 
 const entries = (lastId) => `
 {
-    <page-name> (after: "${lastId}", first: 20, sortBy:meta_firstPublicationDate_ASC) {
+    allPages (after: "${lastId}", first: 20, sortBy:meta_firstPublicationDate_ASC) {
         totalCount
         pageInfo {
             hasNextPage

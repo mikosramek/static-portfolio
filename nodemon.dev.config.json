@@ -1,0 +1,5 @@
+{
+  "watch": ["gen/"],
+  "exec": "npm run build",
+  "ext": "scss, js, html"
+}

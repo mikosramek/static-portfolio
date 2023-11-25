@@ -26,9 +26,11 @@ const compileIndex = async () => {
     );
     schema = await Gen.loadSchema();
 
+    client.createClient(schema);
+
     // get a single page
     const indexData = await client.getBasePages(basePages);
-    const index = _get(indexData, "<page-name>.edges[0].node", {});
+    const index = _get(indexData, "allHomes.edges[0].node", {});
 
     // replace the indexTemplate with values
     const indexHTML = Gen.replaceAllKeys(
