@@ -7,6 +7,9 @@ class Log {
   subtitle(text) {
     console.log(chalk.bgGray.whiteBright.bold(`\n  ${text}  `));
   }
+  note(text) {
+    console.log(chalk.bgGray.white(`   ${text}   `));
+  }
   pos(text) {
     console.log(chalk.green(text));
   }

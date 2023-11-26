@@ -40,6 +40,20 @@ const compileIndex = async () => {
 
     const index = _get(indexData, "allHomes.edges[0].node", {});
 
+    Log.subtitle("Parsing Sections");
+    const sections = {};
+    _get(index, "body", []).forEach(({ primary, fields }) => {
+      const name = _get(primary, "name", "!! name missing !!");
+      sections[name] = [];
+      fields.forEach(({ page_link }) => {
+        const heading = _get(page_link, "heading", "!! heading missing !!");
+        const image = _get(page_link, "header_image", { url: "", alt: "" });
+        const slug = _get(page_link, "_meta.uid", "!!missing_uid!!");
+        sections[name].push({ heading, image, slug });
+      });
+    });
+    Log.pass("sections parsed");
+
     // setup meta
     const headshot = _get(index, "headshot", { url: "", alt: "" });
     const heroImage = _get(index, "hero_image", { url: "", alt: "" });
@@ -57,12 +71,25 @@ const compileIndex = async () => {
       metaTemplate
     );
 
+    Log.subtitle("Generating Nav");
+    const navItemTemplate = await Gen.loadSlice("nav-item");
+    let navHTML = "";
+    Object.keys(sections).forEach((sectionName) => {
+      navHTML += Gen.replaceAllKeys(
+        {
+          section: sectionName,
+        },
+        navItemTemplate
+      );
+    });
+
     // replace the indexTemplate with values
     Log.subtitle("Populating index page");
     const indexHTML = Gen.replaceAllKeys(
       {
         // replacement sections
         meta,
+        nav: navHTML,
         // replacement keys
         "page-title": pageTitle,
         subtitle: _get(index, "subtitle", ""),
@@ -76,6 +103,7 @@ const compileIndex = async () => {
     Gen.testForMissingKeys(indexHTML, "index.html");
 
     // write the index file
+    Log.subtitle("Writing index html file");
     await Gen.writeFile("index", indexHTML);
   } catch (error) {
     console.error(error);

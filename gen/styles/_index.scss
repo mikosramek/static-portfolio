@@ -50,3 +50,61 @@
     border: 15px solid $main;
   }
 }
+
+$waveAmount: 15px;
+@keyframes navWave {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-$waveAmount);
+  }
+}
+
+.Nav {
+  display: flex;
+  justify-content: center;
+  &__container {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    &:hover {
+      .Nav__link {
+        animation-play-state: paused;
+      }
+    }
+  }
+  &__item {
+    position: relative;
+    margin-right: 25px;
+    font-size: 32px;
+    &::after {
+      content: "|";
+      display: block;
+      position: absolute;
+      right: -15px;
+      bottom: -2px;
+    }
+    &:last-of-type {
+      margin-right: 0;
+      &::after {
+        display: none;
+      }
+    }
+    @for $_ from 0 through 10 {
+      &:nth-child(#{$_ + 1}) {
+        .Nav__link {
+          animation-delay: #{$_ * 0.15}s;
+        }
+      }
+    }
+  }
+  &__link {
+    display: block;
+    animation: navWave 1.4s ease-in-out alternate infinite;
+    position: relative;
+    top: 5px;
+    @include shadow(2);
+  }
+}

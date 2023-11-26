@@ -77,6 +77,9 @@ class Gen {
   }
   replaceAllKeys(replacements, template) {
     let html = "" + template;
+    if (ConfigHolder.DECLARE_MISSING_KEYS) {
+      Log.note("keys");
+    }
     Object.entries(replacements).forEach(([key, value]) => {
       if (ConfigHolder.DECLARE_MISSING_KEYS) {
         const test = new RegExp(`%${key}%`, "gi");
