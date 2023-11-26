@@ -6,6 +6,7 @@ module.exports = `
         title
         subtitle
         hero_image
+        headshot
         body {
           __typename
           ... on HomeBodyZone {

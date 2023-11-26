@@ -1,0 +1,6 @@
+@function delay($n) {
+  @for $_ from 1 through $n {
+    $result: $result * $base;
+  }
+  @return $n * 0.15s;
+}

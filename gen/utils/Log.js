@@ -2,7 +2,7 @@ const chalk = require("chalk");
 
 class Log {
   header(text) {
-    console.log(chalk.bgBlack.whiteBright.bold(`\n  ${text}  `));
+    console.log(chalk.bgWhiteBright.black.bold(`\n  ${text}  `));
   }
   subtitle(text) {
     console.log(chalk.bgGray.whiteBright.bold(`\n  ${text}  `));

@@ -3,9 +3,46 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    %meta%
+    <link rel="stylesheet" href="styles.css" />
     <title>%page-title%</title>
   </head>
   <body>
-    <h1>%page-title%</h1>
+    <header
+      class="Header"
+      style="
+        background: linear-gradient(0deg, #efefefed, #efefefed),
+          url('%hero-image-url%');
+        background-size: cover;
+        background-repeat: no-repeat;
+      "
+    >
+      <div class="Header__page-border"></div>
+      <section class="HeaderTop">
+        <div class="HeaderDetails">
+          <h1 class="HeaderDetails__heading">%page-title%</h1>
+          <p class="HeaderDetails__subheading">%subtitle%</p>
+        </div>
+        <div class="HeaderImage">
+          <img
+            class="HeaderImage__image"
+            src="%headshot-url%"
+            alt="%headshot-alt%"
+          />
+        </div>
+      </section>
+      <nav class="HeaderNav">
+        <ul class="HeaderNav__list-container">
+          <!-- start of nav -->
+          %nav%
+          <!-- end of nav -->
+        </ul>
+      </nav>
+    </header>
+    <main class="Main">
+      <!-- start of main -->
+      %main%
+      <!-- end of main -->
+    </main>
   </body>
 </html>

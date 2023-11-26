@@ -87,6 +87,23 @@ class Gen {
 
     return html;
   }
+  testForMissingKeys(html, fileName = "") {
+    const test = /%.+%/g;
+    const misses = [];
+    html.replaceAll(test, (match) => {
+      misses.push(match);
+    });
+    if (misses.length > 0) {
+      Log.subtitle(
+        fileName
+          ? `There are some missed keys in ${fileName}:`
+          : "Some keys haven't been replaced:"
+      );
+      misses.forEach((key) => Log.fail(key));
+    } else {
+      Log.subtitle(fileName ? `${fileName} has no missed keys` : "");
+    }
+  }
   loadSchema() {
     return new Promise((res, rej) => {
       fs.readFile(this.schemaPath, "utf-8", (err, data) => {
