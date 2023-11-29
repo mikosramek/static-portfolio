@@ -88,7 +88,7 @@ const compileSinglePage = async (page, pageMeta) => {
   );
 
   // primary data
-  const headerImageAlt = _get(data, "header_image.url", "");
+  const headerImageAlt = _get(data, "header_image.alt", "");
 
   // Header Links
   const headerLinks = _get(data, "links", []);
