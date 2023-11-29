@@ -19,6 +19,24 @@ edges {
           }
         }
       }
+      body {
+        __typename
+        ... on PageBodyText_block {
+          primary {
+            copy
+          }
+        }
+        ... on PageBodyImage {
+          primary {
+            image
+          } 
+        }
+        ... on PageBodySubheading {
+          primary {
+            subheading
+          }
+        }
+      }
   }
 }
 `;

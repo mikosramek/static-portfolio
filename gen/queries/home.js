@@ -16,7 +16,6 @@ module.exports = `
             fields {
               page_link {
                 ... on Page {
-                  description
                   header_image
                   heading
                   _meta {

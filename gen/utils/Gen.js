@@ -47,10 +47,11 @@ class Gen {
   }
   writePage(outputFolder, data) {
     return new Promise((res, rej) => {
-      if (!fs.existsSync(outputFolder)) {
-        fs.mkdirSync(outputFolder, { recursive: true });
+      const folderPath = path.resolve(this.buildPath, outputFolder);
+      if (!fs.existsSync(folderPath)) {
+        fs.mkdirSync(folderPath, { recursive: true });
       }
-      const filePath = path.resolve(outputFolder, `index.html`);
+      const filePath = path.resolve(folderPath, `index.html`);
       fs.writeFile(filePath, data, (err) => {
         if (err) return rej(err);
         res();
@@ -75,13 +76,10 @@ class Gen {
       return true;
     });
   }
-  replaceAllKeys(replacements, template) {
+  replaceAllKeys(replacements, template, suppressLogs = false) {
     let html = "" + template;
-    if (ConfigHolder.DECLARE_MISSING_KEYS) {
-      Log.note("keys");
-    }
     Object.entries(replacements).forEach(([key, value]) => {
-      if (ConfigHolder.DECLARE_MISSING_KEYS) {
+      if (ConfigHolder.DECLARE_MISSING_KEYS && !suppressLogs) {
         const test = new RegExp(`%${key}%`, "gi");
         test.test(template) ? Log.pass(key) : Log.fail(key);
       }
